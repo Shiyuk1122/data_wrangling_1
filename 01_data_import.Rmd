@@ -12,6 +12,7 @@ This data is for doing data import.
 ```{r}
 library(tidyverse)
 library(readxl)
+library(haven)
 ```
 
 Import first ds
@@ -85,10 +86,23 @@ fotr_df
 
 Two Towers
 ```{r}
-  fotr_df = readxl::read_excel(
+  fotr_df1 = readxl::read_excel(
     path = "data/LotR_Words.xlsx",
     range = "F3:H6"
   )
-fotr_df
+fotr_df1
 ```
+
+
+## Import SAS
+
+read in the PULSE dataset
+
+```{r}
+pulse_df = 
+  read_sas("data/public_pulse_data.sas7bdat")
+
+pulse_df = janitor::clean_names(pulse_df)
+```
+
 
