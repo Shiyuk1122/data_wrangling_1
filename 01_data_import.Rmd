@@ -11,6 +11,7 @@ This data is for doing data import.
 
 ```{r}
 library(tidyverse)
+library(readxl)
 ```
 
 Import first ds
@@ -60,9 +61,34 @@ skimr::skim(pups_df)
 
 ## Excel
 
-```{r}
+Jenny Bryan made "readxl" to solve our problems.
 
+```{r}
+mlb_df = 
+  read_excel("data/mlb11.xlsx")
 ```
 
+```{r}
+mlb_df
+```
 
+Import FOTR words
+
+```{r}
+  fotr_df = readxl::read_excel(
+    path = "data/LotR_Words.xlsx",
+    range = "B3:D6"
+  )
+
+fotr_df
+```
+
+Two Towers
+```{r}
+  fotr_df = readxl::read_excel(
+    path = "data/LotR_Words.xlsx",
+    range = "F3:H6"
+  )
+fotr_df
+```
 
