@@ -1,0 +1,94 @@
+---
+title: "data mani"
+author: "Shiyu KANG"
+date: "2026-09-24"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+```
+
+```{r}
+litters_df =
+  read_csv(
+    "data/FAS_litters.csv",
+    na = c("","NA","."))
+
+litters_df = janitor::clean_names(litters_df)
+
+pups_df = 
+  read_csv(
+    "data/FAS_pups.csv",
+    skip = 3,
+    na = c("","NA",".")
+  )
+
+pups_df = janitor::clean_names(pups_df)
+```
+
+```{r}
+select(litters_df, group, litter_number)
+
+select(litters_df, group:gd_of_birth)
+
+select(litters_df,  -group) #remove "group"
+
+select(litters_df, starts_with("gd")) #只保留列名以 "gd" 开头的列
+
+select(litters_df, starts_with("gd"), group) 
+
+select(litters_df, GROUP = group, everything())
+
+select(litters_df, -starts_with("gd")) #remove col start with "gd"
+```
+
+
+```{r}
+rename(litters_df, GROUP = group). #rename "group" 
+
+relocate(litters_df, litter_number, gd0_weight) #move to front
+
+
+```
+
+In the pups data,select litter number, sex and PD ears
+
+```{r}
+select(pups_df, litter_number, sex, pd_ears) #select these 2 lines
+```
+
+#filter
+
+```{r}
+filter(litters_df, gd_of_birth == 19)
+
+filter(litters_df, pups_born_alive <=5)
+
+filter(litters_df, pups_born_alive != 6)
+
+filter(litters_df, group %in% c("Con7","Con8")) #保留 group 为 "Con7" 或 "Con8" 的行
+
+drop_na(litters_df, gd0_weight) #remove NA value in gd0_weight
+```
+
+```{r}
+filter(pups_df, pd_walk < 11, sex == 2)
+```
+
+##mutate
+```{r}
+mutate(litters_df, 
+       wt_gain = gd18_weight - gd0_weight,
+       wt_gain_squared = wt_gain^2,
+       group = str_to_lower(group)
+       )
+```
+
+```{r}
+mutate(pups_df,
+       PD_walk_minus7 = pd_walk - 7)
+```
+
