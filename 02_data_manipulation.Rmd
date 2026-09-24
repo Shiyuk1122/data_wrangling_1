@@ -92,3 +92,10 @@ mutate(pups_df,
        PD_walk_minus7 = pd_walk - 7)
 ```
 
+##"arrange" the data
+
+```{r}
+arrange(litters_df, pups_born_alive)
+arrange(litters_df, desc(pups_born_alive))
+```
+
