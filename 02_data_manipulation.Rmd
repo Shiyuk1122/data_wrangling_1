@@ -115,7 +115,7 @@ litters_df =
   read_csv("data/FAS_litters.csv", na = c("","NA",".")) |>
   janitor::clean_names() |>
   select(group, starts_with("gd")) |>
-  drop.na() |>
+  drop_na() |>
   mutate(
     wt_gain = gd18_weight - gd0_weight,
     group = str_to_lower(group)
@@ -126,8 +126,13 @@ litters_df =
 Load pups, clean_names 
 
 ```{r}
+readLines("data/FAS_pups.csv", n = 5)
+```
+
+
+```{r}
 pups_df = (
-  read_csv("data/FAS_pups.csv", na = c("","NA",".")) |>
+  read_csv("data/FAS_pups.csv", skip= 3, na = c("","NA",".")) |>
     janitor::clean_names() |>
     drop_na() |>
     select(litter_number, starts_with("pd")) |>
@@ -141,7 +146,7 @@ pups_df = (
 ```{r}
 litters_df |>
   filter(group %in% c("con7", "con8")) |>
-  lm(gd18_weight ~ gd0_weight, data = )
+  lm(gd18_weight ~ gd0_weight, data =_)
 ```
 
 ```{r}
