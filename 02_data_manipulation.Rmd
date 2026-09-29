@@ -164,7 +164,7 @@ pipes and viewing
 
 ```{r}
 litters_df |>
-  filter(group %in% c("Con7","Con8"))
+  filter(group %in% c("con7","con8"))
 
 ```
 
